@@ -114,9 +114,11 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd openwrt/bin/targets/*/*
-        rm -rf packages # 删除插件包文件夹，只留下固件镜像
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV # 这一行重新定义了固件目录的绝对路径
+        # 使用 find 命令精准定位镜像所在目录
+        FIRMWARE_PATH=$(find openwrt/bin/targets/ -name "*combined-squashfs.img.gz" | xargs dirname | head -n 1)
+        cd "$FIRMWARE_PATH"
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: Upload firmware directory
