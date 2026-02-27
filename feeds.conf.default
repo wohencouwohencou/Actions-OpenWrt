@@ -3,4 +3,6 @@ src-git luci https://github.com/immortalwrt/luci.git;openwrt-23.05
 src-git routing https://github.com/immortalwrt/routing.git;openwrt-23.05
 src-git telephony https://github.com/immortalwrt/telephony.git;openwrt-23.05
 
+# 第三方插件源 (保持 Kenzo 源即可，它整合了大部分你需要的插件)
 src-git kenzo https://github.com/kenzok8/openwrt-packages
+src-git small https://github.com/kenzok8/small
